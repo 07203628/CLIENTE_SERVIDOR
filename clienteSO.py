@@ -6,7 +6,7 @@ HOST = '127.0.0.1'
 PORT = 22
 
 def iniciar_cliente():
-    cliente = socket.socket(socket.AF_INET, socket.STOCK_STREAM)
+    cliente = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     
     try:
         cliente.connect((HOST, PORT))
@@ -15,17 +15,20 @@ def iniciar_cliente():
         print("Comandos disponibles: listar_procesos, info_sistema, echo [mensaje]")
         
         while True:
-            mensaje = input("\nUsuario> ")
+            try:
+                mensaje = input("\nUsuario> ")
+            except EOFError:
+                break
             
             if mensaje.strip() == "":
-                continue
+             continue
             
             cliente.send(mensaje.encode('utf-8'))
             
             if mensaje == 'salir':
                 break
-            respuesta = cliente.recv(4096).decode('utf-8')
-            print(f"\nRespuesta del Servidor: \n{'-'*20}\n{respuesta}\n{'-'*20}")
+        respuesta = cliente.recv(4096).decode('utf-8')
+        print(f"\nRespuesta del Servidor: \n{'-'*20}\n{respuesta}\n{'-'*20}")
             
     except ConnectionRefusedError:
         print("Error: No se pudo conectar al servidor.")

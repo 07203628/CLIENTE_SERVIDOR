@@ -31,7 +31,7 @@ def manejar_cliente(conn, addr) :
     connected = True
     while connected:
         try:
-            msg = conn.revc(1024).decode('utf-8')
+            msg = conn.recv(1024).decode('utf-8').strip()
             
             if not msg or msg == 'salir':
                 connected = False
@@ -48,7 +48,7 @@ def manejar_cliente(conn, addr) :
     
 def iniciar_servidor():
     servidor = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    servidor.binf((HOST, PORT))
+    servidor.bind((HOST, PORT))
     servidor.listen()
     
     print(f"--- SERVIDOR DE MONITOREO INICIADO ---")
