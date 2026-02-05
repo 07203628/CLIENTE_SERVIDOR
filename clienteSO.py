@@ -27,8 +27,8 @@ def iniciar_cliente():
             
             if mensaje == 'salir':
                 break
-        respuesta = cliente.recv(4096).decode('utf-8')
-        print(f"\nRespuesta del Servidor: \n{'-'*20}\n{respuesta}\n{'-'*20}")
+            respuesta = cliente.recv(4096).decode('utf-8')
+            print(f"\nRespuesta del Servidor: \n{'-'*20}\n{respuesta}\n{'-'*20}")
             
     except ConnectionRefusedError:
         print("Error: No se pudo conectar al servidor.")
