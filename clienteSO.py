@@ -21,7 +21,7 @@ def iniciar_cliente():
                 break
             
             if mensaje.strip() == "":
-             continue
+                continue
             
             cliente.send(mensaje.encode('utf-8'))
             
